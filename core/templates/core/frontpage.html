@@ -1,0 +1,40 @@
+{% extends "core/base.html" %}
+
+{% block title %} Welcome {% endblock %}
+
+{% block content %}
+    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+        <h2 class="mb-12 text-2xl text-center">Новейшие товары</h2>
+        <div class="grid grid-cols-4 gap-4">
+            {% for item in items %}
+            <a href="{% url 'item:detail' item.id %}">
+                <div>
+                    <img src="{{ item.image.url }}" width="600" class="rounded-t-xl" alt="">
+                </div>
+                
+                <div class="p-6 bg-white rounded-b-xl">
+                    <h2 class="text-2xl"> {{ item.name }}</h2>
+                    <p class="text-gray-500">Цена: {{ item.price }}</p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+        <h1 class="mb-12 text-2xl text-center font-italic">Категории</h1>
+
+        <div class="grid grid-cols-4 gap-5">
+            {% for category in categories %}
+            <div>
+                <a href="#">
+                    <div class="p-6 bg-white rounded-b-xl">
+                        <h2 class="text-2xl"> {{ category.name }}</h2>
+                        <p class="text-gray-500"> {{ category.items.count }} товары</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
